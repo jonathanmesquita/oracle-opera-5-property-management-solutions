@@ -1,222 +1,152 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('search-input');
-    const searchButton = document.getElementById('search-button');
-    const errorCategories = document.querySelector('.error-categories');
-    const errorResultsDiv = document.getElementById('error-results');
-    const errorListSection = document.querySelector('.error-list-section');
-    const errorDetailSection = document.getElementById('error-detail-section');
-    const backToListBtn = document.getElementById('back-to-list-btn');
-
-    // Elementos de detalhes do erro
-    const detailErrorCode = document.getElementById('detail-error-code');
-    const detailErrorMessage = document.getElementById('detail-error-message');
-    const detailDescription = document.getElementById('detail-description');
-    const detailCauses = document.getElementById('detail-causes');
-    const detailSolutions = document.getElementById('detail-solutions');
-    const detailRelatedLinks = document.getElementById('detail-related-links');
-
-    // Mock de dados de erros (substitua por uma API real ou arquivo JSON)
-    const errorsData = [
+    // Dados de exemplo para os erros
+    const errors = [
         {
-            id: 'err-conn-001',
-            code: 'ERR-CONN-001',
-            message: 'Falha na conexão com o servidor de aplicação.',
-            category: 'conectividade',
-            description: 'Este erro indica que o cliente não conseguiu estabelecer uma conexão de rede com o servidor principal da aplicação. Pode ser devido a problemas de rede, firewall ou o servidor estar offline.',
-            causes: [
-                'Servidor da aplicação offline ou inacessível.',
-                'Problemas de rede local ou corporativa.',
-                'Configurações de firewall bloqueando a porta da aplicação.',
-                'Nome do host ou IP do servidor incorreto.',
-                'VPN ou proxy configurado incorretamente.'
-            ],
-            solutions: [
-                'Verifique se o servidor da aplicação está online e acessível.',
-                'Confira as configurações de rede e conectividade do seu dispositivo.',
-                'Verifique as regras do firewall (pessoal e corporativo) para a porta da aplicação.',
-                'Confirme o endereço do servidor (hostname/IP) e a porta utilizada.',
-                'Reinicie o aplicativo e o sistema operacional.'
-            ],
-            relatedLinks: [
-                { text: 'Guia de Configuração de Rede', url: '#' },
-                { text: 'Status do Servidor', url: '#' }
-            ]
+            id: 'ORA-00942',
+            title: 'ORA-00942: table or view does not exist',
+            description: `Este erro ocorre quando a tabela ou view que você está tentando acessar não existe no esquema atual do usuário ou você não tem as permissões necessárias para acessá-la.`,
+            solution: `
+                <p><strong>Verifique o nome:</strong> Certifique-se de que o nome da tabela ou view na sua consulta SQL esteja correto e sem erros de digitação.</p>
+                <p><strong>Verifique o esquema:</strong> Se a tabela/view pertence a outro esquema, você precisará prefixar o nome com o nome do esquema (ex: <code>OUTROS_ESQUEMA.MINHA_TABELA</code>).</p>
+                <p><strong>Verifique as permissões:</strong> O usuário que executa a consulta precisa ter privilégios <code>SELECT</code> (ou <code>UPDATE</code>, <code>INSERT</code>, <code>DELETE</code>, conforme a operação) na tabela ou view.</p>
+                <pre><code>-- Exemplo de como conceder permissão (executar como DBA ou proprietário da tabela):
+GRANT SELECT ON MINHA_TABELA TO MEU_USUARIO;
+FLUSH PRIVILEGES; -- Pode ser necessário em alguns sistemas de DB para aplicar as alterações imediatamente</code></pre>
+                <p><strong>Sinônimo Público/Privado:</strong> Em alguns casos, um sinônimo pode ser necessário para objetos de banco de dados.</p>
+            `
         },
         {
-            id: 'err-auth-002',
-            code: 'ERR-AUTH-002',
-            message: 'Credenciais de usuário inválidas ou expiradas.',
-            category: 'autenticacao',
-            description: 'O nome de usuário ou senha fornecidos estão incorretos, ou a sua sessão de autenticação expirou. Este erro impede o acesso à aplicação.',
-            causes: [
-                'Nome de usuário ou senha digitados incorretamente.',
-                'Conta de usuário bloqueada ou desativada.',
-                'Senha expirada (requer redefinição).',
-                'Problemas de sincronização de diretório (LDAP/AD).',
-                'Tentativas de login excessivas.'
-            ],
-            solutions: [
-                'Verifique o nome de usuário e a senha e tente novamente.',
-                'Redefina sua senha através da funcionalidade "Esqueci minha senha".',
-                'Contate o suporte de TI para verificar o status da sua conta.',
-                'Aguarde alguns minutos em caso de bloqueio temporário por tentativas excessivas.'
-            ],
-            relatedLinks: [
-                { text: 'Redefinição de Senha', url: '#' },
-                { text: 'Políticas de Senha', url: '#' }
-            ]
+            id: 'ORA-01017',
+            title: 'ORA-01017: invalid username/password; logon denied',
+            description: `Este erro indica que você está tentando se conectar ao banco de dados Oracle com um nome de usuário ou senha incorretos.`,
+            solution: `
+                <p><strong>Verifique as credenciais:</strong> Confirme se o nome de usuário e a senha estão digitados corretamente, respeitando maiúsculas e minúsculas.</p>
+                <p><strong>Status da conta:</strong> A conta pode estar bloqueada ou expirada. Contate o administrador do banco de dados para verificar o status da sua conta.</p>
+                <p><strong>Serviço/SID incorreto:</strong> Certifique-se de que o nome do serviço ou SID (System Identifier) do banco de dados está correto na sua string de conexão.</p>
+                <pre><code>-- Exemplo de desbloqueio de conta (executar como SYSDBA):
+ALTER USER SEU_USUARIO ACCOUNT UNLOCK;
+ALTER USER SEU_USUARIO IDENTIFIED BY sua_nova_senha;</code></pre>
+            `
         },
         {
-            id: 'err-db-003',
-            code: 'ERR-DB-003',
-            message: 'Erro ao acessar o banco de dados.',
-            category: 'banco-dados',
-            description: 'A aplicação encontrou um problema ao tentar se conectar ou executar uma operação no banco de dados. Isso pode indicar que o banco de dados está offline, inacessível ou há problemas com as credenciais.',
-            causes: [
-                'Banco de dados offline ou com falha.',
-                'Credenciais do banco de dados incorretas ou expiradas.',
-                'Conexão de rede entre a aplicação e o banco de dados falhou.',
-                'Capacidade máxima de conexões do banco de dados atingida.',
-                'Problemas de permissão do usuário no banco de dados.'
-            ],
-            solutions: [
-                'Verifique o status do servidor de banco de dados.',
-                'Confirme as credenciais de acesso ao banco de dados na configuração da aplicação.',
-                'Verifique a conectividade de rede entre o servidor da aplicação e o servidor de banco de dados.',
-                'Consulte os logs do banco de dados para mais detalhes sobre o erro específico.',
-                'Aumente o limite de conexões do banco de dados, se aplicável.'
-            ],
-            relatedLinks: [
-                { text: 'Monitoramento de Banco de Dados', url: '#' },
-                { text: 'Configuração de Conexão DB', url: '#' }
-            ]
+            id: 'ERR-001-API',
+            title: 'ERR-001-API: Falha na Comunicação com API Externa',
+            description: `O sistema não conseguiu estabelecer comunicação ou receber uma resposta válida de uma API externa crucial para a operação.`,
+            solution: `
+                <p><strong>Verifique a Conectividade:</strong> Certifique-se de que o servidor do sistema tem acesso à internet e que não há bloqueios de firewall para o endpoint da API.</p>
+                <p><strong>Status da API Externa:</strong> Consulte a página de status da API externa ou entre em contato com o suporte da API para verificar se há interrupções no serviço.</p>
+                <p><strong>Logs do Sistema:</strong> Verifique os logs do sistema para mensagens de erro mais detalhadas sobre a falha de conexão (URL da API, status HTTP, etc.).</p>
+                <p><strong>Configuração da API:</strong> Confirme se as chaves de API, tokens ou credenciais de autenticação estão corretas e atualizadas nas configurações do sistema.</p>
+                <pre><code>// Exemplo de log de erro (node.js)
+console.error("API Error: Failed to connect to external service.", error.message);
+// Exemplo de erro (Python)
+logging.error(f"Failed to fetch data from API: {e}")</code></pre>
+            `
         },
-        // Adicione mais erros aqui com a mesma estrutura
+        {
+            id: 'ERR-002-DB',
+            title: 'ERR-002-DB: Falha na Conexão com o Banco de Dados',
+            description: `O sistema não conseguiu estabelecer uma conexão com o banco de dados. Isso pode impedir qualquer operação que exija acesso a dados.`,
+            solution: `
+                <p><strong>Servidor de Banco de Dados:</strong> Verifique se o servidor do banco de dados está online e acessível.</p>
+                <p><strong>Credenciais:</strong> Confirme as credenciais de conexão (usuário, senha, host, porta) configuradas no sistema. Podem ter sido alteradas ou expiradas.</p>
+                <p><strong>Firewall/Rede:</strong> Verifique se há regras de firewall ou configurações de rede que estejam bloqueando a conexão do sistema ao banco de dados.</p>
+                <p><strong>Limite de Conexões:</strong> O banco de dados pode ter atingido seu limite máximo de conexões ativas. Contate o DBA para verificar e ajustar, se necessário.</p>
+            `
+        },
+        {
+            id: 'ERR-003-PERM',
+            title: 'ERR-003-PERM: Permissão Negada',
+            description: `Um usuário ou o próprio sistema tentou realizar uma ação para a qual não possui as permissões necessárias.`,
+            solution: `
+                <p><strong>Permissões do Usuário:</strong> Se um usuário específico está recebendo este erro, verifique suas permissões de acesso dentro do sistema e/ou no banco de dados.</p>
+                <p><strong>Permissões de Arquivo/Diretório:</strong> Se o erro envolve acesso a arquivos (ex: upload, leitura de configurações), verifique as permissões do sistema de arquivos (chmod/chown em Linux/Unix).</p>
+                <p><strong>Credenciais do Serviço:</strong> Se um serviço ou processo do sistema está gerando o erro, verifique as credenciais com as quais ele está sendo executado e suas permissões associadas.</p>
+                <pre><code># Exemplo de comando Linux para verificar permissões
+ls -l /caminho/do/arquivo
+# Exemplo de comando para mudar permissões (ATENÇÃO: use com cuidado)
+chmod 755 /caminho/do/arquivo</code></pre>
+            `
+        }
     ];
 
-    // Função para renderizar os cards de erro
-    function renderErrorCards(filteredErrors) {
-        errorResultsDiv.innerHTML = ''; // Limpa os resultados anteriores
-        if (filteredErrors.length === 0) {
-            errorResultsDiv.innerHTML = '<p class="no-results">Nenhum erro encontrado com os critérios de busca.</p>';
-            return;
-        }
-        filteredErrors.forEach(error => {
-            const card = document.createElement('article');
-            card.classList.add('error-card');
-            card.setAttribute('data-code', error.code);
-            card.setAttribute('data-category', error.category);
-            card.innerHTML = `
-                <h3 class="error-code">${error.code}</h3>
-                <p class="error-message">${error.message}</p>
-                <a href="#" class="view-details-btn" data-error-id="${error.id}">Ver Detalhes <span class="arrow">→</span></a>
-            `;
-            errorResultsDiv.appendChild(card);
-        });
-        addCardEventListeners();
-    }
+    const errorList = document.getElementById('errorList');
+    const searchInput = document.getElementById('searchInput');
+    const errorDetailContent = document.getElementById('errorDetailContent');
+    let activeErrorId = null;
 
-    // Função para adicionar listeners aos botões de detalhes
-    function addCardEventListeners() {
-        document.querySelectorAll('.view-details-btn').forEach(button => {
-            button.removeEventListener('click', showErrorDetails); // Evita múltiplos listeners
-            button.addEventListener('click', showErrorDetails);
+    // Função para renderizar a lista de erros
+    function renderErrorList(filter = '') {
+        errorList.innerHTML = ''; // Limpa a lista existente
+        const filteredErrors = errors.filter(error =>
+            error.id.toLowerCase().includes(filter.toLowerCase()) ||
+            error.title.toLowerCase().includes(filter.toLowerCase())
+        );
+
+        filteredErrors.forEach(error => {
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = `#${error.id}`;
+            link.textContent = error.id;
+            link.setAttribute('data-error-id', error.id);
+            link.classList.add('error-link');
+
+            // Adiciona a classe 'active' se for o erro atualmente selecionado
+            if (error.id === activeErrorId) {
+                link.classList.add('active');
+            }
+
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                displayErrorDetail(error.id);
+                // Remove a classe 'active' de todos os links
+                document.querySelectorAll('.error-link').forEach(l => l.classList.remove('active'));
+                // Adiciona a classe 'active' ao link clicado
+                link.classList.add('active');
+            });
+            listItem.appendChild(link);
+            errorList.appendChild(listItem);
         });
     }
 
     // Função para exibir os detalhes do erro
-    function showErrorDetails(event) {
-        event.preventDefault();
-        const errorId = event.currentTarget.dataset.errorId;
-        const error = errorsData.find(e => e.id === errorId);
-
+    function displayErrorDetail(errorId) {
+        const error = errors.find(e => e.id === errorId);
         if (error) {
-            detailErrorCode.textContent = error.code;
-            detailErrorMessage.textContent = error.message;
-            detailDescription.textContent = error.description;
+            errorDetailContent.innerHTML = `
+                <h2>${error.title}</h2>
+                <h4>Descrição:</h4>
+                <p>${error.description}</p>
+                <h4>Solução(ões):</h4>
+                ${error.solution}
+            `;
+            // Adiciona classe para ativar animação de fade-in
+            errorDetailContent.classList.add('active');
+            activeErrorId = errorId; // Atualiza o erro ativo
+        } else {
+            errorDetailContent.innerHTML = `<h3 class="placeholder-title">Erro não encontrado para o ID: ${errorId}</h3>`;
+            errorDetailContent.classList.remove('active'); // Remove a classe se não encontrar
+            activeErrorId = null; // Reinicia o erro ativo
+        }
+    }
 
-            // Causas
-            detailCauses.innerHTML = '';
-            error.causes.forEach(cause => {
-                const li = document.createElement('li');
-                li.textContent = cause;
-                detailCauses.appendChild(li);
-            });
+    // Event Listener para a barra de pesquisa
+    searchInput.addEventListener('input', (e) => {
+        renderErrorList(e.target.value);
+    });
 
-            // Soluções (pode ser uma lista ordenada ou parágrafos)
-            detailSolutions.innerHTML = '';
-            if (Array.isArray(error.solutions)) {
-                const ol = document.createElement('ol');
-                error.solutions.forEach(solution => {
-                    const li = document.createElement('li');
-                    li.textContent = solution;
-                    ol.appendChild(li);
-                });
-                detailSolutions.appendChild(ol);
-            } else {
-                detailSolutions.innerHTML = `<p>${error.solutions}</p>`;
+    // Inicializa a lista de erros ao carregar a página
+    renderErrorList();
+
+    // Lidar com o carregamento direto via hash na URL
+    if (window.location.hash) {
+        const initialErrorId = window.location.hash.substring(1); // Remove o '#'
+        displayErrorDetail(initialErrorId);
+        // Ativa o link correspondente na sidebar
+        document.querySelectorAll('.error-link').forEach(link => {
+            if (link.getAttribute('data-error-id') === initialErrorId) {
+                link.classList.add('active');
             }
-
-
-            // Links Relacionados
-            detailRelatedLinks.innerHTML = '';
-            error.relatedLinks.forEach(link => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = link.url;
-                a.textContent = link.text;
-                a.target = '_blank'; // Abrir em nova aba
-                li.appendChild(a);
-                detailRelatedLinks.appendChild(li);
-            });
-
-            errorListSection.classList.add('hidden');
-            errorDetailSection.classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' }); // Rola para o topo
-        }
+        });
     }
-
-    // Voltar para a lista de erros
-    backToListBtn.addEventListener('click', () => {
-        errorDetailSection.classList.add('hidden');
-        errorListSection.classList.remove('hidden');
-    });
-
-    // Funcionalidade de busca
-    function performSearch() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredErrors = errorsData.filter(error =>
-            error.code.toLowerCase().includes(searchTerm) ||
-            error.message.toLowerCase().includes(searchTerm) ||
-            error.description.toLowerCase().includes(searchTerm)
-        );
-        renderErrorCards(filteredErrors);
-    }
-
-    searchButton.addEventListener('click', performSearch);
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            performSearch();
-        }
-    });
-
-    // Funcionalidade de filtro por categoria
-    errorCategories.addEventListener('click', (event) => {
-        event.preventDefault();
-        const target = event.target;
-        if (target.tagName === 'A') {
-            // Remove active de todos e adiciona no clicado
-            document.querySelectorAll('.error-categories a').forEach(link => link.classList.remove('active'));
-            target.classList.add('active');
-
-            const category = target.dataset.category;
-            const filteredErrors = errorsData.filter(error =>
-                category === 'all' || error.category === category
-            );
-            renderErrorCards(filteredErrors);
-        }
-    });
-
-    // Inicialização: Renderizar todos os erros no carregamento
-    renderErrorCards(errorsData);
 });
