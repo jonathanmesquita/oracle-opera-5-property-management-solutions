@@ -3,81 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentação de Erros - [Nome do Seu Produto]</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Oswald:wght=400;700&display=swap" rel="stylesheet">
+    <title>Documentação de Erros - Sistema [Seu Sistema]</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="background-overlay">
-        <video autoplay muted loop id="video-background">
-            <source src="assets/bg-video.mp4" type="video/mp4">
-            Seu navegador não suporta vídeos.
-        </video>
-    </div>
-
-    <header class="main-header">
-        <div class="container">
-            <div class="logo">[Seu Logo]</div>
-            <nav class="main-nav">
-                <input type="text" id="search-input" placeholder="Buscar erros por código ou descrição..." class="search-bar">
-                <button id="search-button" class="search-button">Buscar</button>
-            </nav>
+    <header>
+        <div class="header-content">
+            <h1 class="system-title">SISTEMA [SEU SISTEMA]</h1>
+            <h2 class="doc-title">DOCUMENTAÇÃO DE ERROS</h2>
         </div>
     </header>
 
-    <main class="main-content container">
+    <main>
         <aside class="sidebar">
-            <h2>Categorias de Erros</h2>
-            <ul class="error-categories">
-                <li><a href="#" data-category="conectividade">Conectividade</a></li>
-                <li><a href="#" data-category="autenticacao">Autenticação</a></li>
-                <li><a href="#" data-category="banco-dados">Banco de Dados</a></li>
-                <li><a href="#" data-category="integracao">Integração</a></li>
-                <li><a href="#" data-category="permissao">Permissões</a></li>
-                </ul>
+            <nav>
+                <input type="text" id="searchInput" placeholder="Pesquisar erros..." aria-label="Pesquisar erros">
+                <ul id="errorList">
+                    </ul>
+            </nav>
         </aside>
 
-        <section class="error-list-section">
-            <h1>Erros Comuns</h1>
-            <div id="error-results" class="error-grid">
-                <article class="error-card" data-code="ERR-CONN-001" data-category="conectividade">
-                    <h3 class="error-code">ERR-CONN-001</h3>
-                    <p class="error-message">Falha na conexão com o servidor de aplicação.</p>
-                    <a href="#" class="view-details-btn" data-error-id="err-conn-001">Ver Detalhes <span class="arrow">→</span></a>
-                </article>
-                <article class="error-card" data-code="ERR-AUTH-002" data-category="autenticacao">
-                    <h3 class="error-code">ERR-AUTH-002</h3>
-                    <p class="error-message">Credenciais de usuário inválidas ou expiradas.</p>
-                    <a href="#" class="view-details-btn" data-error-id="err-auth-002">Ver Detalhes <span class="arrow">→</span></a>
-                </article>
+        <section class="error-detail-section">
+            <div id="errorDetailContent" class="error-content-wrapper">
+                <h3 class="placeholder-title">Selecione um erro na barra lateral para ver os detalhes.</h3>
                 </div>
-        </section>
-
-        <section id="error-detail-section" class="error-detail-section hidden">
-            <button id="back-to-list-btn" class="back-button">← Voltar para a Lista</button>
-            <h2 id="detail-error-code" class="detail-error-code"></h2>
-            <p id="detail-error-message" class="detail-error-message"></p>
-            <div class="detail-content">
-                <h3>Descrição:</h3>
-                <p id="detail-description"></p>
-                <h3>Causas Prováveis:</h3>
-                <ul id="detail-causes"></ul>
-                <h3>Soluções:</h3>
-                <div id="detail-solutions"></div>
-                <h3>Links Relacionados:</h3>
-                <ul id="detail-related-links"></ul>
-            </div>
-            <button class="report-issue-btn">Reportar um Problema</button>
         </section>
     </main>
 
-    <footer class="main-footer">
-        <div class="container">
-            <p>&copy; 2025 [Seu Produto/Empresa]. Todos os direitos reservados.</p>
-        </div>
+    <footer>
+        <p>&copy; 2025 [Sua Empresa/Organização]. Todos os direitos reservados.</p>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
