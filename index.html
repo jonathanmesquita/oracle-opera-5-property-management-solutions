@@ -1,41 +1,120 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentação de Erros - Sistema [Seu Sistema]</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Sistema de Controle e Helpdesk</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
-<body>
-    <header>
-        <div class="header-content">
-            <h1 class="system-title">SISTEMA [SEU SISTEMA]</h1>
-            <h2 class="doc-title">DOCUMENTAÇÃO DE ERROS</h2>
+<body class="light-mode">
+    <header class="primary-header">
+        <div class="container primary-navigation">
+            <div class="logo">
+                <a href="index.html" class="logo-link">Meu Sistema</a>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav">
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar...">
+                    <button onclick="searchDocumentation()" class="search-button"><i class="fas fa-search"></i></button>
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-tachometer-alt"></i> Painel</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-bug"></i> Erros</a></li>
+                    <li class="nav-item"><a href="help/index.html" class="nav-link"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                    <li class="nav-item"><a href="tools.html" class="nav-link"><i class="fas fa-tools"></i> Ferramentas</a></li>
+                    <li class="nav-item"><a href="sql-console.html" class="nav-link"><i class="fas fa-database"></i> Consultas SQL</a></li>
+                </ul>
+            </nav>
+            <div class="theme-switcher">
+                <button id="lightModeBtn" class="theme-button light-mode-button inactive-light">
+                    <i class="fas fa-sun"></i>
+                    <span class="theme-label light-label">Claro</span>
+                </button>
+                <button id="darkModeBtn" class="theme-button dark-mode-button active-dark">
+                    <i class="fas fa-moon"></i>
+                    <span class="theme-label dark-label">Escuro</span>
+                </button>
+            </div>
         </div>
     </header>
 
-    <main>
-        <aside class="sidebar">
-            <nav>
-                <input type="text" id="searchInput" placeholder="Pesquisar erros..." aria-label="Pesquisar erros">
-                <ul id="errorList">
-                    </ul>
-            </nav>
-        </aside>
+    <main class="main-content">
+        <div class="container">
+            <section id="hero" class="hero-section">
+                <h2 class="hero-title">Central de Suporte e Ferramentas</h2>
+                <p class="hero-subtitle">Gerencie erros, acesse ferramentas úteis e encontre a ajuda que você precisa.</p>
+            </section>
 
-        <section class="error-detail-section">
-            <div id="errorDetailContent" class="error-content-wrapper">
-                <h3 class="placeholder-title">Selecione um erro na barra lateral para ver os detalhes.</h3>
+            <section id="shortcuts" class="shortcuts-section">
+                <h2 class="section-title">Acesso Rápido</h2>
+                <div class="grid shortcuts-grid">
+                    <a href="#" class="shortcut-item">
+                        <i class="fas fa-plus-circle shortcut-icon"></i>
+                        <span class="shortcut-label">Reportar Erro</span>
+                    </a>
+                    <a href="#" class="shortcut-item">
+                        <i class="fas fa-list-alt shortcut-icon"></i>
+                        <span class="shortcut-label">Listar Erros</span>
+                    </a>
+                    <a href="tools.html" class="shortcut-item">
+                        <i class="fas fa-screwdriver-wrench shortcut-icon"></i>
+                        <span class="shortcut-label">Ferramentas</span>
+                    </a>
+                    <a href="help/index.html" class="shortcut-item">
+                        <i class="fas fa-book shortcut-icon"></i>
+                        <span class="shortcut-label">Documentação</span>
+                    </a>
+                    <a href="sql-console.html" class="shortcut-item">
+                        <i class="fas fa-terminal shortcut-icon"></i>
+                        <span class="shortcut-label">SQL Console</span>
+                    </a>
                 </div>
-        </section>
+            </section>
+
+            <section id="help-center-preview" class="help-preview-section">
+                <h2 class="section-title">Explore o Help Center</h2>
+                <p class="section-subtitle">Encontre soluções passo a passo e respostas para perguntas frequentes.</p>
+                <div class="grid help-categories-grid">
+                    <div class="category-preview">
+                        <h3 class="category-title"><i class="fas fa-rocket"></i> Primeiros Passos</h3>
+                        <ul class="category-list">
+                            <li class="category-item"><a href="help/primeiros-passos/criar-usuario.html" class="category-link">Criar Usuário</a></li>
+                            <li class="category-item"><a href="help/primeiros-passos/navegar-sistema.html" class="category-link">Navegação Básica</a></li>
+                        </ul>
+                    </div>
+                    <div class="category-preview">
+                        <h3 class="category-title"><i class="fas fa-exclamation-triangle"></i> Erros Comuns</h3>
+                        <ul class="category-list">
+                            <li class="category-item"><a href="help/erros-comuns/erro-conexao.html" class="category-link">Erro de Conexão</a></li>
+                            <li class="category-item"><a href="help/erros-comuns/erro-autenticacao.html" class="category-link">Erro de Autenticação</a></li>
+                        </ul>
+                    </div>
+                    <div class="category-preview">
+                        <h3 class="category-title"><i class="fas fa-lightbulb"></i> Ferramentas Úteis</h3>
+                        <ul class="category-list">
+                            <li class="category-item"><a href="tools.html#log-viewer" class="category-link">Visualizador de Logs</a></li>
+                            <li class="category-item"><a href="tools.html#test-connection" class="category-link">Teste de Conexão</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="view-all-link"><a href="help/index.html">Ver todo o Help Center <i class="fas fa-arrow-right"></i></a></p>
+            </section>
+        </div>
     </main>
 
-    <footer>
-        <p>&copy; 2025 [Sua Empresa/Organização]. Todos os direitos reservados.</p>
+    <footer class="primary-footer">
+        <div class="container footer-content">
+            <p class="copyright">&copy; 2025 Meu Sistema</p>
+            <p class="developer">Developed by Jonathan Mesquita</p>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramentas e Projetos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body class="light-mode">
+    <header class="primary-header">
+        <div class="container primary-navigation">
+            <div class="logo">
+                <a href="index.html" class="logo-link">Meu Sistema</a>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Início</a></li>
+                </ul>
+            </nav>
+            <div class="theme-switcher">
+                <button id="lightModeBtn" class="theme-button light-mode-button inactive-light">
+                    <i class="fas fa-sun"></i>
+                    <span class="theme-label light-label">Claro</span>
+                </button>
+                <button id="darkModeBtn" class="theme-button dark-mode-button active-dark">
+                    <i class="fas fa-moon"></i>
+                    <span class="theme-label dark-label">Escuro</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section id="tools-header" class="hero-section">
+                <h2 class="hero-title">Suas Ferramentas e Projetos</h2>
+                <p class="hero-subtitle">Acesse rapidamente seus projetos e ferramentas úteis.</p>
+            </section>
+
+            <section id="projects-section">
+                <div class="devsite-tabs">
+                    <div class="devsite-tabs-header">
+                        <ul class="devsite-tab-list" role="tablist">
+                            <li role="tab" aria-selected="true">
+                                <a href="#web-projects">Projetos Web</a>
+                            </li>
+                            <li role="tab" aria-selected="false">
+                                <a href="#mobile-apps">Aplicativos Mobile</a>
+                            </li>
+                            <li role="tab" aria-selected="false">
+                                <a href="#utilities">Utilitários</a>
+                            </li>
+                        </ul>
+                        <div class="devsite-tabs-dropdown">
+                            <button class="devsite-dropdown-button">
+                                <span class="devsite-dropdown-label">Projetos Web</span>
+                                <i class="fas fa-caret-down"></i>
+                            </button>
+                            <ul class="devsite-dropdown-menu devsite-dropdown-transition">
+                                <li><a href="#web-projects" data-tab="web-projects">Projetos Web</a></li>
+                                <li><a href="#mobile-apps" data-tab="mobile-apps">Aplicativos Mobile</a></li>
+                                <li><a href="#utilities" data-tab="utilities">Utilitários</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="devsite-tabs-content">
+                        <div id="web-projects" class="devsite-tab-panel" role="tabpanel" aria-labelledby="web-projects">
+                            <h3>Projetos Web</h3>
+                            <div class="project-list">
+                                <a href="https://seuprojeto1.com" class="project-item">
+                                    <i class="fas fa-code"></i> Projeto Web 1
+                                    <span>Acessar</span>
+                                </a>
+                                <a href="https://seuprojeto2.com" class="project-item">
+                                    <i class="fas fa-globe"></i> Projeto Web 2
+                                    <span>Acessar</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div id="mobile-apps" class="devsite-tab-panel" role="tabpanel" aria-labelledby="mobile-apps" aria-hidden="true">
+                            <h3>Aplicativos Mobile</h3>
+                            <div class="project-list">
+                                <a href="https://seuapp1.com" class="project-item">
+                                    <i class="fas fa-mobile-alt"></i> App Mobile 1
+                                    <span>Acessar</span>
+                                </a>
+                                <a href="https://seuapp2.com" class="project-item">
+                                    <i class="fab fa-android"></i> App Android 1
+                                    <span>Acessar</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div id="utilities" class="devsite-tab-panel" role="tabpanel" aria-labelledby="utilities" aria-hidden="true">
+                            <h3>Utilitários</h3>
+                            <div class="project-list">
+                                <a href="https://suautilidade1.com" class="project-item">
+                                    <i class="fas fa-wrench"></i> Utilitário 1
+                                    <span>Acessar</span>
+                                </a>
+                                <a href="https://suautilidade2.com" class="project-item">
+                                    <i class="fas fa-calculator"></i> Utilitário 2
+                                    <span>Acessar</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="primary-footer">
+        <div class="container footer-content">
+            <p class="copyright">&copy; 2025 Meu Sistema</p>
+            <p class="developer">Developed by Jonathan Mesquita</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/tools.js"></script>
+</body>
+</html>

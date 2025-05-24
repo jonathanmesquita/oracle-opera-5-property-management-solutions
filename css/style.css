@@ -1,0 +1,533 @@
+/* Reset básico e configurações de fonte */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Cores base */
+:root {
+    --primary-blue: #007bff; /* Azul tecnologia */
+    --secondary-orange: #ff9800; /* Laranja diferencial */
+    --light-background: #f8f9fa; /* Branco minimalista para o fundo claro */
+    --light-text: #333; /* Texto escuro para o modo claro */
+    --dark-background: #222;
+    --dark-text: #eee;
+    --header-dark: #2c3e50;
+    --header-light: #fff;
+    --border-light: #ddd;
+    --border-dark: #555;
+}
+
+body.light-mode {
+    background-color: var(--light-background);
+    color: var(--light-text);
+}
+
+body.dark-mode {
+    background-color: var(--dark-background);
+    color: var(--dark-text);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.grid {
+    display: grid;
+    gap: 25px;
+}
+
+.section-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: var(--light-text); /* Padrão para modo claro */
+}
+
+body.dark-mode .section-title {
+    color: var(--dark-text);
+}
+
+.section-subtitle {
+    color: #6c757d; /* Cinza mais claro para subtítulos */
+    margin-bottom: 30px;
+    font-size: 1em;
+}
+
+body.dark-mode .section-subtitle {
+    color: #bbb;
+}
+
+/* Header */
+.primary-header {
+    background-color: var(--header-light);
+    color: var(--primary-blue);
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+body.dark-mode .primary-header {
+    background-color: var(--header-dark);
+    color: var(--dark-text);
+    border-bottom: 1px solid var(--border-dark);
+}
+
+.primary-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo .logo-link {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+body.dark-mode .logo .logo-link {
+    color: var(--dark-text);
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.search-box {
+    display: flex;
+    margin-right: 20px;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-light);
+    border-radius: 5px 0 0 5px;
+    font-size: 0.9em;
+    color: var(--light-text);
+    background-color: var(--header-light);
+    max-width: 200px;
+}
+
+body.dark-mode .search-input {
+    border-color: var(--border-dark);
+    color: var(--dark-text);
+    background-color: var(--header-dark);
+}
+
+.search-button {
+    padding: 8px 12px;
+    border: 1px solid var(--border-light);
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+    background-color: var(--primary-blue); /* Azul tecnologia */
+    color: var(--header-light);
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+body.dark-mode .search-button {
+    background-color: var(--secondary-orange);
+    color: var(--header-dark);
+    border-color: var(--secondary-orange);
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+}
+
+.nav-item {
+    margin-left: 15px;
+}
+
+.nav-link {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--secondary-orange); /* Laranja diferencial */
+}
+
+body.dark-mode .nav-link {
+    color: var(--dark-text);
+}
+
+body.dark-mode .nav-link:hover {
+    color: var(--secondary-orange);
+}
+
+.nav-link i {
+    margin-right: 5px;
+}
+
+/* Theme Switcher */
+.theme-switcher {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.theme-button {
+    padding: 8px 15px;
+    border: 1px solid var(--border-light);
+    border-radius: 20px; /* Forma arredondada de interruptor */
+    background-color: var(--header-light); /* Cor de fundo padrão */
+    color: var(--primary-blue);
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-left: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.theme-button i {
+    font-size: 1em;
+}
+
+.theme-label {
+    display: inline-block;
+    font-size: 0.9em;
+}
+
+body.dark-mode .theme-button {
+    border-color: var(--border-dark);
+    background-color: var(--header-dark);
+    color: var(--dark-text);
+}
+
+/* Estilos para o modo claro ativo */
+.light-mode-button.active-light {
+    background-color: var(--secondary-orange); /* Laranja para o sol "ligado" */
+    color: var(--header-light);
+    border-color: var(--secondary-orange);
+    box-shadow: 0 0 8px rgba(255, 152, 0, 0.7);
+}
+.light-mode-button.inactive-light {
+    background-color: var(--light-background);
+    color: #777;
+    border-color: var(--border-light);
+}
+
+/* Estilos para o modo escuro ativo */
+.dark-mode-button.active-dark {
+    background-color: var(--secondary-orange); /* Laranja para a lua "ligada" */
+    color: var(--header-light);
+    border-color: var(--secondary-orange);
+    box-shadow: 0 0 8px rgba(255, 152, 0, 0.7);
+}
+.dark-mode-button.inactive-dark {
+    background-color: var(--header-dark);
+    color: #777;
+    border-color: var(--border-dark);
+}
+
+/* Esconder o label do tema inativo */
+.light-mode-button.inactive-light .light-label,
+.dark-mode-button.inactive-dark .dark-label {
+    display: none;
+}
+
+/* Mostrar o label do tema ativo */
+.light-mode-button.active-light .light-label,
+.dark-mode-button.active-dark .dark-label {
+    display: inline-block;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 40px 0;
+    text-align: center;
+    background-color: var(--light-background); /* Branco minimalista */
+    border-radius: 8px;
+    margin-bottom: 30px;
+    padding: 30px;
+}
+
+body.dark-mode .hero-section {
+    background-color: #333;
+}
+
+.hero-title {
+    font-size: 2.2em;
+    color: var(--primary-blue); /* Azul tecnologia */
+    margin-bottom: 15px;
+}
+
+body.dark-mode .hero-title {
+    color: var(--dark-text);
+}
+
+.hero-subtitle {
+    font-size: 1em;
+    color: #555;
+}
+
+body.dark-mode .hero-subtitle {
+    color: #bbb;
+}
+
+/* Shortcuts Section */
+.shortcuts-section {
+    margin-bottom: 40px;
+}
+
+.shortcuts-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.shortcut-item {
+    background-color: var(--header-light); /* Branco */
+    color: var(--light-text); /* Preto */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid var(--border-light); /* Cinza claro */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+body.dark-mode .shortcut-item {
+    background-color: #444;
+    color: var(--dark-text);
+    border-color: var(--border-dark);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.shortcut-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .shortcut-item:hover {
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.shortcut-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: var(--primary-blue); /* Azul tecnologia */
+}
+
+body.dark-mode .shortcut-icon {
+    color: var(--secondary-orange); /* Laranja diferencial */
+}
+
+.shortcut-label {
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+/* Help Preview Section */
+.help-preview-section {
+    padding: 40px 0;
+    background-color: var(--light-background); /* Branco minimalista */
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+body.dark-mode .help-preview-section {
+    background-color: #333;
+}
+
+.help-categories-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    margin-bottom: 20px;
+}
+
+.category-preview {
+    background-color: var(--header-light); /* Branco */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border-light); /* Cinza claro */
+}
+
+body.dark-mode .category-preview {
+    background-color: #444;
+    color: var(--dark-text);
+    border-color: var(--border-dark);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.category-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--primary-blue); /* Azul tecnologia */
+}
+
+body.dark-mode .category-title {
+    color: var(--dark-text);
+}
+
+.category-title i {
+    margin-right: 8px;
+    color: var(--primary-blue);
+}
+
+body.dark-mode .category-title i {
+    color: var(--secondary-orange);
+}
+
+.category-list {
+    list-style: none;
+}
+
+.category-item {
+    margin-bottom: 8px;
+}
+
+.category-link {
+    text-decoration: none;
+    color: #555;
+    transition: color 0.3s ease;
+    font-size: 0.95em;
+}
+
+body.dark-mode .category-link {
+    color: #bbb;
+}
+
+.category-link:hover {
+    color: var(--primary-blue); /* Azul tecnologia */
+}
+
+body.dark-mode .category-link:hover {
+    color: var(--secondary-orange); /* Laranja diferencial */
+}
+
+.view-all-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.view-all-link a {
+    color: var(--primary-blue); /* Azul tecnologia */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .view-all-link a {
+    color: var(--secondary-orange); /* Laranja diferencial */
+}
+
+.view-all-link a:hover {
+    color: #0056b3;
+}
+
+body.dark-mode .view-all-link a:hover {
+    color: #e68a00;
+}
+
+/* Footer */
+.primary-footer {
+    background-color: var(--header-light); /* Branco */
+    color: var(--primary-blue); /* Azul tecnologia */
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid var(--border-light); /* Cinza claro */
+    font-size: 0.9em;
+}
+
+body.dark-mode .primary-footer {
+    background-color: var(--header-dark);
+    color: var(--dark-text);
+    border-top: 1px solid var(--border-dark);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.copyright {
+    margin-bottom: 5px;
+}
+
+.developer {
+    color: #777;
+}
+
+body.dark-mode .developer {
+    color: #999;
+}
+
+/* Menu Toggle Button */
+.menu-toggle {
+    display: none; /* Escondido por padrão em telas maiores */
+    background: none;
+    color: var(--primary-blue); /* Azul tecnologia */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.5em;
+}
+
+body.dark-mode .menu-toggle {
+    color: var(--dark-text);
+}
+
+@media (max-width: 768px) {
+    .primary-navigation {
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative; /* Para posicionar o botão toggle */
+    }
+
+    .logo {
+        margin-bottom: 15px;
+    }
+
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .main-nav {
+        width: 100%;
+        display: none; /* Esconde o menu por padrão em telas menores */
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 40px; /* Espaço para o botão toggle */
+    }
+
+    .main-nav.is-open {
+        display: flex;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        width: 100;
+    }
